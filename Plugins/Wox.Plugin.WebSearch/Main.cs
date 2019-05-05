@@ -63,7 +63,18 @@ namespace Wox.Plugin.WebSearch
                         IcoPath = searchSource.IconPath,
                         Action = c =>
                         {
-                            Process.Start(searchSource.Url.Replace("{q}", Uri.EscapeDataString(keyword)));
+                            if (keyword.ToLower() == "c")
+                            {
+                                Process.Start("chrome.exe", searchSource.Url.Replace("{q}", string.Empty));
+                            }
+                            else if (keyword.ToLower() == "f")
+                            {
+                                Process.Start("firefox.exe", searchSource.Url.Replace("{q}", string.Empty));
+                            }
+                            else
+                            {
+                                Process.Start(searchSource.Url.Replace("{q}", Uri.EscapeDataString(keyword)));
+                            }
                             return true;
                         }
                     };
